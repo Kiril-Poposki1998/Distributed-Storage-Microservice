@@ -1,0 +1,26 @@
+deployment:
+  name: s3-filestore
+
+app:
+  name: s3-filestore
+
+image:
+  name: bitnami/minio
+  port: 80
+  version: latest
+
+service:
+  api:
+    name: s3-api
+    port: 9000
+  website:
+    name: s3-website
+    port: 9001
+
+env:
+  MINIO_ROOT_USER: "root"
+  MINIO_ROOT_PASSWORD: "root-pass"
+  MINIO_SERVER_HOST: "minio-server"
+  MINIO_DEFAULT_BUCKETS: '3d-models'
+  MINIO_SERVER_ACCESS_KEY: xPk0gtbMoIMdgkIP
+  MINIO_SERVER_SECRET_KEY: OFFPXshuQt5ZJU9U1gyQW08g4qsTEx3R
