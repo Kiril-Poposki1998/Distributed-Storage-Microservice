@@ -12,11 +12,6 @@ skaffold 2.0.2
 kubectl 1.25.3
 istio 1.16.0
 ```
-## Installing prerequisites (Windows)
-The following command needs to be run as administrator in PowerShell.
-``` 
-choco install packages.config --confirm 
-```
 ## Deploy a registry for the Docker images
 ```
 docker run -d --restart=always -p "127.0.0.1:5000:5000" --name "registry" registry:2
@@ -24,11 +19,11 @@ docker run -d --restart=always -p "127.0.0.1:5000:5000" --name "registry" regist
 ## Deploy Kubernetes in Docker with kind
 Create and set the context to point to the newly created cluster:
 ```
-kind create cluster --image="kindest/node:v1.25.3" --config="infrastructure\kind\nodes_3.yml"
+kind create cluster --image="kindest/node:v1.25.3" --config="infrastructure/kind/nodes_3.yml"
 kubectl cluster-info --context distributed-storage-system
 kubectl create ns distributed-storage-system
 kubens distributed-storage-system
-kubectl apply -f .\infrastructure\registry\config_map.yml
+kubectl apply -f ./infrastructure/registry/config_map.yml
 docker network connect "kind" registry
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
@@ -45,14 +40,15 @@ git submodule update --init --recursive --remote
 Install istio with the following commands:
 ```
 docker exec distributed-storage-system-control-plane mkdir /scripts
-docker cp .\infrastructure\scripts\install_istio.sh distributed-storage-system-control-plane:/scripts/install_istio.sh
+docker cp ./infrastructure/scripts/install_istio.sh distributed-storage-system-control-plane:/scripts/install_istio.sh
 docker exec -i distributed-storage-system-control-plane /scripts/install_istio.sh
 ```
 Install the nginx ingress controller:
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=120s
-docker cp .\infrastructure\scripts\inject_envoy_ingress.sh distributed-storage-system-control-plane:/scripts/inject_envoy_ingress.sh
+kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=120
+docker exec -i distributed-storage-system-control-plane mkdir /scripts
+docker cp ./infrastructure/scripts/inject_envoy_ingress.sh distributed-storage-system-control-plane:/scripts/inject_envoy_ingress.sh
 docker exec -i distributed-storage-system-control-plane /scripts/inject_envoy_ingress.sh
 ```
 ## Deploy the microservice to Kubernetes
@@ -64,14 +60,14 @@ skaffold dev
 ## Add monitoring (Optional, recommended for DevOps or analysis)
 Add the addons for monitoring 
 ```
-docker cp .\infrastructure\scripts\install_addons_delete_istio_folder.sh distributed-storage-system-control-plane:/scripts/install_addons_delete_istio_folder.sh
+docker cp ./infrastructure/scripts/install_addons_delete_istio_folder.sh distributed-storage-system-control-plane:/scripts/install_addons_delete_istio_folder.sh
 docker exec -i distributed-storage-system-control-plane /scripts/install_addons_delete_istio_folder.sh
 ```
 Install the monitoring ingress
 ```
-helm install monitoring-ingress .\infrastructure\helm\helm_monitoring\
+helm install monitoring-ingress ./infrastructure/helm/helm_monitoring/
 ```
-Add these to your C:\Windows\System32\drivers\etc\hosts file:
+Add these to your hosts file:
 ```
 127.0.0.1 grafana.cluster
 127.0.0.1 kiali.cluster
