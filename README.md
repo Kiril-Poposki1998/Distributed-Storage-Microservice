@@ -2,15 +2,16 @@
 ## Prerequisites
 For the project to be deployed locally some tools are needed to be installed.
 ```
-Docker 20.10.21
+Docker 20.10.22
+helm 3.11.1
 kind 0.17.0
-helm 3.10.1
-kubectx 0.9.4
-kubens 0.9.4
-k9s 0.26.3
-skaffold 2.0.2
-kubectl 1.25.3
-istio 1.16.0
+k9s 0.27.3
+skaffold 2.1.0
+istioctl 1.17.0
+```
+Use asdf to install them:
+```
+asdf install
 ```
 ## Deploy a registry for the Docker images
 ```
@@ -47,7 +48,6 @@ Install the nginx ingress controller:
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=120
-docker exec -i distributed-storage-system-control-plane mkdir /scripts
 docker cp ./infrastructure/scripts/inject_envoy_ingress.sh distributed-storage-system-control-plane:/scripts/inject_envoy_ingress.sh
 docker exec -i distributed-storage-system-control-plane /scripts/inject_envoy_ingress.sh
 ```
