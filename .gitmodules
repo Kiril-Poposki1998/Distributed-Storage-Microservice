@@ -1,0 +1,3 @@
+[submodule "submodules/DSM-Full-Page"]
+	path = submodules/DSM-Full-Page
+	url = git@github.com:Kiril-Poposki1998/DSM-Full-Page.git
