@@ -1,8 +1,8 @@
 deployment:
-  name: full-page-deploy
+  name: nav-bar-deploy
 
 app:
-  name: full-page
+  name: nav-bar
 
 image:
   name: full-page
