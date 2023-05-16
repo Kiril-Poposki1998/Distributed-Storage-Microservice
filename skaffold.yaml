@@ -15,11 +15,6 @@ build:
 deploy:
   helm:
     releases:
-    - name: helm_monitoring
-      chartPath: infrastructure/helm/helm_monitoring
-      valuesFiles:
-      - infrastructure/helm/helm_monitoring/dev.yaml
-      version: 0.1.0
     - name: minio
       chartPath: infrastructure/helm/minio
       valuesFiles:
