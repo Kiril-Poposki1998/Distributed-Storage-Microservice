@@ -33,10 +33,6 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 git submodule init
 git submodule update
 ```
-### Updating submodules
-```
-git submodule update --init --recursive --remote
-```
 ## Install istio service mesh and add ingress controller
 Install istio with the following commands:
 ```
