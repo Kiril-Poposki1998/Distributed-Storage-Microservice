@@ -4,17 +4,22 @@ metadata:
   name: distributed-storage-microservice
 build:
   artifacts:
-  - image: bitnami/minio
+  - image: full-page
     context: submodules/DSM-Full-Page
     docker:
       dockerfile: Dockerfile
-  - image: docker.io/bitnami/postgresql
+  - image: nav-bar
     context: submodules/DSM-nav-bar
     docker:
       dockerfile: Dockerfile
 deploy:
   helm:
     releases:
+    - name: full-page
+      chartPath: infrastructure/helm/full-page
+      valuesFiles:
+      - infrastructure/helm/full-page/values.yaml
+      version: 1.0.0
     - name: minio
       chartPath: infrastructure/helm/minio
       valuesFiles:
