@@ -1,0 +1,32 @@
+apiVersion: skaffold/v4beta2
+kind: Config
+metadata:
+  name: distributed-storage-microservice
+build:
+  artifacts:
+  - image: bitnami/minio
+    context: submodules/DSM-Full-Page
+    docker:
+      dockerfile: Dockerfile
+  - image: docker.io/bitnami/postgresql
+    context: submodules/DSM-nav-bar
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  helm:
+    releases:
+    - name: helm_monitoring
+      chartPath: infrastructure/helm/helm_monitoring
+      valuesFiles:
+      - infrastructure/helm/helm_monitoring/dev.yaml
+      version: 0.1.0
+    - name: minio
+      chartPath: infrastructure/helm/minio
+      valuesFiles:
+      - infrastructure/helm/minio/dev.yaml
+      version: 0.1.0
+    - name: postgresql
+      chartPath: infrastructure/helm/postgresql
+      valuesFiles:
+      - infrastructure/helm/postgresql/dev.yaml
+      version: 0.1.0
