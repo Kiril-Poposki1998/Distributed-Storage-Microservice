@@ -69,6 +69,7 @@ Add these to your hosts file:
 127.0.0.1 kiali.cluster
 127.0.0.1 prometheus.cluster
 127.0.0.1 jaeger.cluster
+127.0.0.1 dsm.local
 ```
 ## Deleting cluster
 ```
