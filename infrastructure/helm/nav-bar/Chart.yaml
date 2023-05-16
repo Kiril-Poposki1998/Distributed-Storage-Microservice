@@ -1,6 +1,6 @@
 apiVersion: v2
-name: full-page
-description: Full page of DSM
+name: nav-bar
+description: Navigation bar of DSM
 
 # A chart can be either an 'application' or a 'library' chart.
 #

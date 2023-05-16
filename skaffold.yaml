@@ -23,7 +23,7 @@ deploy:
     - name: nav-bar
       chartPath: infrastructure/helm/nav-bar
       valuesFiles:
-      - infrastructure/helm/full-page/values.yaml
+      - infrastructure/helm/nav-bar/values.yaml
       version: 1.0.0
     - name: minio
       chartPath: infrastructure/helm/minio
