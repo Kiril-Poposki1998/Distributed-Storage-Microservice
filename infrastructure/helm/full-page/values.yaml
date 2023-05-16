@@ -1,0 +1,13 @@
+deployment:
+  name: full-page-deploy
+
+app:
+  name: full-page
+
+image:
+  name: full-page
+  version: 1.0.0
+  port: 8080
+
+env:
+  enabled: false
