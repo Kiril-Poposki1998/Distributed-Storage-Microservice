@@ -1,14 +1,7 @@
 # Distributed storage system
 ## Prerequisites
-For the project to be deployed locally some tools are needed to be installed.
-```
-Docker 20.10.22
-helm 3.11.1
-kind 0.17.0
-k9s 0.27.3
-skaffold 2.1.0
-istioctl 1.17.0
-```
+For the project to be deployed locally some tools are needed to be installed and this is going to be done through <b>asdf</b>.
+
 Use asdf to install them:
 ```
 asdf install
@@ -36,23 +29,28 @@ git submodule update
 ## Install istio service mesh and add ingress controller
 Install istio with the following commands:
 ```
+istioctl install --set profile=demo -y
+```
+or
+```
 docker exec distributed-storage-system-control-plane mkdir /scripts
 docker cp ./infrastructure/scripts/install_istio.sh distributed-storage-system-control-plane:/scripts/install_istio.sh
 docker exec -i distributed-storage-system-control-plane /scripts/install_istio.sh
 ```
-Install the nginx ingress controller:
+Add MetalLB CRDs and install configuration:
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=120
-docker cp ./infrastructure/scripts/inject_envoy_ingress.sh distributed-storage-system-control-plane:/scripts/inject_envoy_ingress.sh
-docker exec -i distributed-storage-system-control-plane /scripts/inject_envoy_ingress.sh
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml
+kubectl apply -f infrastructure/manifests/MetalLb.yaml
+```
+## Add IP address to hosts file
+```
+bash ./infrastructure/scripts/IP_to_hosts.sh 
 ```
 ## Deploy the microservice to Kubernetes
 ```
 kubectl label namespace distributed-storage-system istio-injection=enabled
 skaffold dev
 ```
-**NOTE: The password for the database is password**
 ## Add monitoring (Optional, recommended for DevOps or analysis)
 Add the addons for monitoring 
 ```
@@ -69,7 +67,6 @@ Add these to your hosts file:
 127.0.0.1 kiali.cluster
 127.0.0.1 prometheus.cluster
 127.0.0.1 jaeger.cluster
-127.0.0.1 dsm.local
 ```
 ## Deleting cluster
 ```
