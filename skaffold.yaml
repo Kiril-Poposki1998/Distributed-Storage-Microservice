@@ -1,37 +1,37 @@
-apiVersion: skaffold/v4beta2
+apiVersion: skaffold/v4beta5
 kind: Config
 metadata:
   name: distributed-storage-microservice
 build:
   artifacts:
-  - image: full-page
-    context: submodules/DSM-Full-Page
-    docker:
-      dockerfile: Dockerfile
-  - image: nav-bar
-    context: submodules/DSM-nav-bar
-    docker:
-      dockerfile: Dockerfile
+    - image: full-page
+      context: submodules/DSM-Full-Page
+      docker:
+        dockerfile: Dockerfile
+    - image: nav-bar
+      context: submodules/DSM-nav-bar
+      docker:
+        dockerfile: Dockerfile
 deploy:
   helm:
     releases:
-    - name: full-page
-      chartPath: infrastructure/helm/full-page
-      valuesFiles:
-      - infrastructure/helm/full-page/values.yaml
-      version: 1.0.0
-    - name: nav-bar
-      chartPath: infrastructure/helm/nav-bar
-      valuesFiles:
-      - infrastructure/helm/nav-bar/values.yaml
-      version: 1.0.0
-    - name: minio
-      chartPath: infrastructure/helm/minio
-      valuesFiles:
-      - infrastructure/helm/minio/dev.yaml
-      version: 0.1.0
-    - name: postgresql
-      chartPath: infrastructure/helm/postgresql
-      valuesFiles:
-      - infrastructure/helm/postgresql/dev.yaml
-      version: 0.1.0
+      - name: full-page
+        chartPath: infrastructure/helm/full-page
+        valuesFiles:
+          - infrastructure/helm/full-page/values.yaml
+        version: 1.0.0
+      - name: minio
+        chartPath: infrastructure/helm/minio
+        valuesFiles:
+          - infrastructure/helm/minio/dev.yaml
+        version: 0.1.0
+      - name: nav-bar
+        chartPath: infrastructure/helm/nav-bar
+        valuesFiles:
+          - infrastructure/helm/nav-bar/values.yaml
+        version: 1.0.0
+      - name: postgresql
+        chartPath: infrastructure/helm/postgresql
+        valuesFiles:
+          - infrastructure/helm/postgresql/dev.yaml
+        version: 0.1.0

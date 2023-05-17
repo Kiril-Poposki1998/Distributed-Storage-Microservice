@@ -11,6 +11,8 @@ spec:
   - match:
     - uri:
         exact: /
+    - uri:
+        exact: /fetch_navbar.js
     route:
     - destination:  
         host: {{ .Values.app.name }}
