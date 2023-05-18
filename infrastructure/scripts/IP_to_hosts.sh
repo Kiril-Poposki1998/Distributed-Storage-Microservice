@@ -7,9 +7,9 @@ then
 fi
 echo "Getting hosts file"
 hosts_entry=`sudo grep "dsm.local" /etc/hosts`
-if [ ! -z $hosts_entry ]
+if [[ ! -z $hosts_entry ]]
 then
-    sudo sed "s/$hosts_entry/$ip_address dsm.local/g" /etc/hosts 
+    sudo sed 's/$hosts_entry/$ip_address dsm.local/g' /etc/hosts 
 else
     echo "$ip_address dsm.local" | sudo tee -a /etc/hosts
 fi
