@@ -12,7 +12,9 @@ spec:
     - uri:
         exact: /
     - uri:
-        exact: /fetch_navbar.js
+        regex: /.*js
+    - uri:
+        regex: /.*css
     route:
     - destination:  
         host: {{ .Values.app.name }}
