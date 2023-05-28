@@ -12,7 +12,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 echo -e "\e[1;42m Install istio \e[0m"
 istioctl install --set profile=demo -y
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml
-echo -e "\e[1;42m Sleeping for 30 seconds to install MetalLB\e[0m"
-sleep 30s
+echo -e "\e[1;42m Sleeping for 60 seconds to install MetalLB\e[0m"
+sleep 60s
 kubectl apply -f infrastructure/manifests/MetalLb.yaml
 kubectl label namespace distributed-storage-system istio-injection=enabled
