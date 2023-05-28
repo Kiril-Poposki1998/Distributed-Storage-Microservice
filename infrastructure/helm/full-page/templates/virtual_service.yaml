@@ -14,7 +14,7 @@ spec:
     - uri:
         regex: /.*js
     - uri:
-        regex: /.*css
+        exact: /style.css
     route:
     - destination:  
         host: {{ .Values.app.name }}

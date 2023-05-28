@@ -11,6 +11,10 @@ spec:
   - match:
     - uri:
         exact: /nav/
+    - uri:
+        regex: /nav/.*js
+    - uri:
+        regex: /nav/.*css
     route:
     - destination:  
         host: {{ .Values.app.name }}
