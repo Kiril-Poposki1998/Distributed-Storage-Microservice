@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ .Values.app.name }}-vs
+spec:
+  hosts:
+  - dsm.local
+  gateways:
+  - {{ .Values.app.name }}-gateway
+  http:
+  - match:
+    - uri:
+        exact: /footer/
+    - uri:
+        regex: /footer/.*js
+    - uri:
+        exact: /footer/.*.css
+    route:
+    - destination:  
+        host: {{ .Values.app.name }}

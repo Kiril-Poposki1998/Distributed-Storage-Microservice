@@ -1,0 +1,13 @@
+deployment:
+  name: footer-deploy
+
+app:
+  name: footer
+
+image:
+  name: footer
+  version: 1.0.0
+  port: 80
+
+env:
+  enabled: false
