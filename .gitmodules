@@ -5,3 +5,7 @@
 [submodule "submodules/DSM-nav-bar"]
 	path = submodules/DSM-nav-bar
 	url = git@github.com:Kiril-Poposki1998/DSM-nav-bar.git
+[submodule "DSM-footer"]
+	path = submodules/DSM-footer
+	url = git@github.com:Kiril-Poposki1998/DSM-footer.git
+	branch = master

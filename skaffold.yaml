@@ -12,6 +12,10 @@ build:
       context: submodules/DSM-nav-bar
       docker:
         dockerfile: Dockerfile
+    - image: footer
+      context: submodules/DSM-footer
+      docker:
+        dockerfile: Dockerfile
 deploy:
   helm:
     releases:
@@ -20,11 +24,11 @@ deploy:
         valuesFiles:
           - infrastructure/helm/full-page/values.yaml
         version: 1.0.0
-      - name: minio
-        chartPath: infrastructure/helm/minio
+      - name: footer
+        chartPath: infrastructure/helm/footer
         valuesFiles:
-          - infrastructure/helm/minio/dev.yaml
-        version: 0.1.0
+          - infrastructure/helm/footer/values.yaml
+        version: 1.0.0
       - name: nav-bar
         chartPath: infrastructure/helm/nav-bar
         valuesFiles:
@@ -34,4 +38,9 @@ deploy:
         chartPath: infrastructure/helm/postgresql
         valuesFiles:
           - infrastructure/helm/postgresql/dev.yaml
+        version: 0.1.0
+      - name: minio
+        chartPath: infrastructure/helm/minio
+        valuesFiles:
+          - infrastructure/helm/minio/dev.yaml
         version: 0.1.0
