@@ -5,3 +5,4 @@ skaffold 2.4.0
 istioctl 1.17.0
 kubectx 0.9.4
 kubectl 1.25.3
+yarn 1.22.19
