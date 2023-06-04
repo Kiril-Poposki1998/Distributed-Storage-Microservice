@@ -1,7 +1,6 @@
 [submodule "submodules/DSM-Full-Page"]
 	path = submodules/DSM-Full-Page
 	url = git@github.com:Kiril-Poposki1998/DSM-Full-Page.git
-
 [submodule "submodules/DSM-nav-bar"]
 	path = submodules/DSM-nav-bar
 	url = git@github.com:Kiril-Poposki1998/DSM-nav-bar.git
@@ -9,3 +8,7 @@
 	path = submodules/DSM-footer
 	url = git@github.com:Kiril-Poposki1998/DSM-footer.git
 	branch = master
+[submodule "DSM-main"]
+	path = submodules/DSM-main
+	url = git@github.com:Kiril-Poposki1998/DSM-main.git
+	branch = main
