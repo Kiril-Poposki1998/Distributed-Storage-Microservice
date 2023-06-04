@@ -6,3 +6,4 @@ istioctl 1.17.0
 kubectx 0.9.4
 kubectl 1.25.3
 yarn 1.22.19
+nodejs 20.2.0
