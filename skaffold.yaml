@@ -16,6 +16,10 @@ build:
       context: submodules/DSM-footer
       docker:
         dockerfile: Dockerfile
+    - image: main-page
+      context: submodules/DSM-main
+      docker:
+        dockerfile: Dockerfile
 deploy:
   helm:
     releases:
@@ -28,6 +32,11 @@ deploy:
         chartPath: infrastructure/helm/footer
         valuesFiles:
           - infrastructure/helm/footer/values.yaml
+        version: 1.0.0
+      - name: main-page
+        chartPath: infrastructure/helm/main-page
+        valuesFiles:
+          - infrastructure/helm/main-page/values.yaml
         version: 1.0.0
       - name: nav-bar
         chartPath: infrastructure/helm/nav-bar

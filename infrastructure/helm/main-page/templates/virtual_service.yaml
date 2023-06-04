@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ .Values.app.name }}-vs
+spec:
+  hosts:
+  - dsm.local
+  gateways:
+  - {{ .Values.app.name }}-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /main
+    route:
+    - destination:  
+        host: {{ .Values.app.name }}

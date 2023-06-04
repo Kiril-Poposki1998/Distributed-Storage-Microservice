@@ -1,0 +1,15 @@
+deployment:
+  name: main-page-deploy
+
+app:
+  name: main-page
+
+image:
+  name: main-page
+  version: 1.0.0
+  port: 3000
+
+env:
+  enabled: true
+  values:
+    PORT: 3000
