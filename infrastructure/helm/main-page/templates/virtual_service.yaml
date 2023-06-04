@@ -14,3 +14,9 @@ spec:
     route:
     - destination:  
         host: {{ .Values.app.name }}
+  - match:
+    - uri:
+        prefix: /_next
+    route:
+    - destination:  
+        host: {{ .Values.app.name }}
