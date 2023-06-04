@@ -13,3 +13,4 @@ env:
   enabled: true
   values:
     PORT: 3000
+    NODE_ENV: development
