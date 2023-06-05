@@ -10,13 +10,9 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /main
-    route:
-    - destination:  
-        host: {{ .Values.app.name }}
-  - match:
+        exact: /main
     - uri:
-        prefix: /_next
+        regex: /_next/.*
     route:
     - destination:  
         host: {{ .Values.app.name }}
