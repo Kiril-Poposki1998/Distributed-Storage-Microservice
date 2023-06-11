@@ -9,10 +9,10 @@ spec:
   - {{ .Values.app.name }}-gateway
   http:
   - match:
+    {{- range .Values.routes }}
     - uri:
-        exact: /main
-    - uri:
-        regex: /_next/.*
+        regex: {{ . }}
+    {{- end }}
     route:
     - destination:  
         host: {{ .Values.app.name }}
