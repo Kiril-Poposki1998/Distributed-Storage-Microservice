@@ -12,9 +12,9 @@ spec:
     - uri:
         exact: /
     - uri:
-        regex: /.*js
+        regex: /[a-z]*.js
     - uri:
-        exact: /style.css
+        regex: /[a-z]*.css
     route:
     - destination:  
         host: {{ .Values.app.name }}
