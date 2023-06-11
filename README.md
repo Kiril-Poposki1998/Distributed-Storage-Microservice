@@ -54,19 +54,14 @@ skaffold dev
 ## Add monitoring (Optional, recommended for DevOps or analysis)
 Add the addons for monitoring 
 ```
-docker cp ./infrastructure/scripts/install_addons_delete_istio_folder.sh distributed-storage-system-control-plane:/scripts/install_addons_delete_istio_folder.sh
-docker exec -i distributed-storage-system-control-plane /scripts/install_addons_delete_istio_folder.sh
+kubectl apply -f ./infrastructure/manifests/monitoring/
 ```
-Install the monitoring ingress
+Access the monitoring services with istio
 ```
-helm install monitoring-ingress ./infrastructure/helm/helm_monitoring/
-```
-Add these to your hosts file:
-```
-127.0.0.1 grafana.cluster
-127.0.0.1 kiali.cluster
-127.0.0.1 prometheus.cluster
-127.0.0.1 jaeger.cluster
+istioctl dashboard kiali
+istioctl dashboard grafana
+istioctl dashboard jaeger
+istioctl dashboard prometheus
 ```
 ## Deleting cluster
 ```
