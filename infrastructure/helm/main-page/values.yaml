@@ -11,7 +11,8 @@ image:
 
 routes:
   - /main
-  - /_next.*
+  - /_next.*.js
+  - /main/\w.css
 
 env:
   enabled: true
